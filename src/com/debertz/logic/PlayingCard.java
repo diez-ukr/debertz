@@ -1,3 +1,5 @@
+package com.debertz.logic;
+
 import java.util.Comparator;
 
 public class PlayingCard
@@ -37,7 +39,7 @@ public class PlayingCard
 		return rank + " " + suit;
 	}
 
-	static class PlayingCardComparator implements Comparator<PlayingCard>
+	public static class PlayingCardComparator implements Comparator<PlayingCard>
 	{
 
 		@Override
