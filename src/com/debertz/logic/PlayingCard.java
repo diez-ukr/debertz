@@ -39,6 +39,18 @@ public class PlayingCard
 		return rank + " " + suit;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PlayingCard other = (PlayingCard) obj;
+		return suit == other.suit && rank == other.rank;
+	}
+
 	public static class PlayingCardComparator implements Comparator<PlayingCard>
 	{
 
