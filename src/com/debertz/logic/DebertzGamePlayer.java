@@ -5,11 +5,13 @@ import java.util.LinkedList;
 
 public class DebertzGamePlayer
 {
+
 	public DebertzGamePlayer(String playerName)
 	{
 		this.playerName = playerName;
 		hand = new LinkedList<PlayingCard>();
 		tricks = new LinkedList<PlayingCard[]>();
+		combinations = null;
 	}
 
 	public boolean addCard(PlayingCard card)
@@ -44,10 +46,11 @@ public class DebertzGamePlayer
 				return true;
 		return false;
 	}
-
 	public LinkedList<PlayingCard[]> tricks;
+	public int points;
 
 	public String playerName;
 	public volatile LinkedList<PlayingCard> hand;
+	public LinkedList<DebertzCombination> combinations;
 
 }
