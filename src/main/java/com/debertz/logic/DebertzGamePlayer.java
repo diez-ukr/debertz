@@ -12,6 +12,7 @@ public class DebertzGamePlayer
 		hand = new LinkedList<PlayingCard>();
 		tricks = new LinkedList<PlayingCard[]>();
 		combinations = null;
+		gotlastTrick = false;
 	}
 
 	public boolean addCard(PlayingCard card)
@@ -52,5 +53,5 @@ public class DebertzGamePlayer
 	public String playerName;
 	public volatile LinkedList<PlayingCard> hand;
 	public LinkedList<DebertzCombination> combinations;
-
+	public boolean gotlastTrick;
 }

@@ -152,6 +152,8 @@ public class DebertzGameRound
 			return turn;
 		debertzGamePlayers[turn].tricks.add(currentTrick);
 		lastTrick = currentTrick;
+		if (debertzGamePlayers[turn].hand.size() == 0)
+			debertzGamePlayers[turn].gotlastTrick = true;
 		currentTrick = new PlayingCard[playersCount];
 		for (int i = 0; i < playersCount; i++)
 			currentTrick[i] = null;
@@ -164,6 +166,56 @@ public class DebertzGameRound
 			if(p.hand.size() != 0)
 				return true;
 		return false;
+	}
+
+	public int getScore(String name)
+	{
+		for(DebertzGamePlayer p : debertzGamePlayers)
+		{
+			if (p.playerName.equals(name))
+			{
+				int retval = 0;
+				for(DebertzCombination debertzCombination : p.combinations)
+					retval += debertzCombination.getPoints();
+				if(p.gotlastTrick)
+					retval += 10;
+				for(PlayingCard[] trick : p.tricks)
+				{
+					for(PlayingCard card : trick)
+					{
+						switch (card.rank)
+						{
+							case Ace:
+								retval += 11;
+								break;
+							case Ten:
+								retval += 10;
+								break;
+							case King:
+								retval += 4;
+								break;
+							case Queen:
+								retval += 3;
+								break;
+							case Jack:
+								if (card.suit == trumpSuit)
+									retval += 20;
+								else
+									retval += 2;
+								break;
+							case Nine:
+								if (card.suit == trumpSuit)
+									retval += 14;
+								break;
+							default:
+							    break;
+						}
+					}
+				}
+				return retval;
+			}
+		}
+		return -1;
 	}
 
 	private int getHighestCard(PlayingCard[] cards)
