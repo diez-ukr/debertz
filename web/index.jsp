@@ -20,11 +20,11 @@
   <body>
     <div id="authorization">
         <form name="authorizationForm" method="post" action="test.jsp">
-            <div style="width: 100%; height: 33%;">
+            <div style="width: 90%; height: 33%;">
                 <div style="width: auto; float: left">
                     Login:
                 </div>
-                <div style="width: 150px; float: right;">
+                <div style="width: 67%; float: right;">
                     <input name="login" type="text">
                 </div>
             </div>
@@ -32,7 +32,7 @@
                 <div style="width: auto; float: left;">
                     Password:
                 </div>
-                <div style="width: 150px; float: right;">
+                <div style="width: 67%; float: right;">
                     <input name="password" type="password">
                 </div>
             </div>
