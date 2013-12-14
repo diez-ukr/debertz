@@ -158,6 +158,14 @@ public class DebertzGameRound
 		return turn;
 	}
 
+	public boolean isRoundFinished()
+	{
+		for(DebertzGamePlayer p : debertzGamePlayers)
+			if(p.hand.size() != 0)
+				return true;
+		return false;
+	}
+
 	private int getHighestCard(PlayingCard[] cards)
 	{
 		if (cards.length < 2 || cards.length > 4)

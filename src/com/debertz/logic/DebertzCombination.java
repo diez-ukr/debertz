@@ -22,10 +22,24 @@ public class DebertzCombination
 				points = 20;
 		}
 		if (cards.size() == 2) points = 20;
+		isPlaying = false;
+	}
+
+	public int getPoints()
+	{
+		if (!isPlaying) return 0;
+		return points;
+	}
+
+	public void markAsPlaying()
+	{
+		isPlaying = true;
 	}
 
 	public PlayingCard leadCard;
 	public LinkedList<PlayingCard> cards;
-	public int points;
+
+	private int points;
+	private boolean isPlaying;
 
 }
