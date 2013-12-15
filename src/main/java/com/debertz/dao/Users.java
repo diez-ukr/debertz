@@ -1,9 +1,10 @@
 package com.debertz.dao;
 
-import com.mongodb.*;
+import com.mongodb.BasicDBObject;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
 
 import java.util.Random;
-import java.util.Set;
 
 /**
  * Created by eluppol on 15.12.13.
@@ -19,28 +20,22 @@ public class Users {
     public static synchronized String generateSID(String name, String password) {
         if (!validatePassword(name, password)) return "";
         Random rand = new Random(System.currentTimeMillis());
-        String sid = new Integer(new Integer(rand.nextInt(1000000)).hashCode()).toString();
+        String sid = Integer.toString(new Integer(rand.nextInt(1000000)).hashCode());
         collection.update(new BasicDBObject("name", name), new BasicDBObject("$set", new BasicDBObject("sid", sid)));
         return sid;
     }
 
     private static synchronized  boolean validateUser(String user) {
         DBCursor cursor = collection.find(new BasicDBObject("name", user));
-        if (cursor.count() > 0)
-            return false;
-        return  true;
+	    return cursor.count() <= 0;
     }
 
     private static synchronized  boolean validatePassword(String user, String pass) {
         DBCursor cursor = collection.find(new BasicDBObject("name", user).append("password", pass));
-        if (cursor.count() == 0)
-            return false;
-        return  true;
+	    return cursor.count() != 0;
     }
-    private static synchronized  boolean validateSid(String user, String sid) {
+    public static synchronized  boolean validateSid(String user, String sid) {
         DBCursor cursor = collection.find(new BasicDBObject("name", user).append("password", sid));
-        if (cursor.count() == 0)
-            return false;
-        return  true;
+	    return cursor.count() != 0;
     }
 }
