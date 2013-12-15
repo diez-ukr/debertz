@@ -1,4 +1,7 @@
-package com.debertz.authorization;/*
+package com.debertz.authorization;
+
+import com.mongodb.*;
+/*
  * Author: R.Bietin
  * Date: 14.12.13
  * Time: 23:48
