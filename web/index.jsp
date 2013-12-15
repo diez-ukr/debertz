@@ -1,46 +1,26 @@
-<%-- Created by IntelliJ IDEA. --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-  <head>
-    <title>My JSP Page</title>
-    <style type="text/css">
-        div#authorization{
-            position: absolute;
-            margin: auto;
-            top: 0;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            width: 250px;
-            height: 150px;
-            border: 1px solid;
-        }​
-    </style>
-  </head>
-  <body>
-    <div id="authorization">
-        <form name="authorizationForm" method="post" action="test.jsp">
-            <div style="width: 100%; height: 33%;">
-                <div style="width: auto; float: left">
-                    Login:
-                </div>
-                <div style="width: 150px; float: right;">
-                    <input name="login" type="text">
-                </div>
-            </div>
-            <div style="width: 100%; height: 33%;">
-                <div style="width: auto; float: left;">
-                    Password:
-                </div>
-                <div style="width: 150px; float: right;">
-                    <input name="password" type="password">
-                </div>
-            </div>
-            <div style="width: 100%; height: 33%;">
-                <input type="submit" value="Login">
-                <input type="reset" value="Clear">
-            </div>
-        </form>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%@include file="templates/bootstrap-include.jsp"%>
+    <title>Bootstrap, from Twitter</title>
+</head>
+
+<body>
+
+<%@include file="templates/header.jsp" %>
+
+<div class="container">
+    <div class="hero-unit">
+        <h1>Hello, fucking world!</h1>
+        <p>This is a fucking main page of this fucking site of this fucking game.</p>
     </div>
-  </body>
+
+    <div class="row">
+        <div class="span8">
+            <h2>Here' some info about some things</h2>
+            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+        </div>
+    </div>
+</div>
+</body>
 </html>
