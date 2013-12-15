@@ -10,7 +10,7 @@ import java.util.Random;
  * Created by eluppol on 15.12.13.
  */
 public class Users {
-    private static DBCollection collection = ConnectionPull.getConnection().getDB("debertz").getCollection("users");
+    private static DBCollection collection = ConnectionPool.getConnection().getDB("debertz").getCollection("users");
     public static synchronized boolean addUser(String name, String password) {
         if (!validateUser(name))
             return false;
