@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <%@include file="templates/bootstrap-include.jsp"%>
-    <title>Bootstrap, from Twitter</title>
+    <title>Debertz Online</title>
 </head>
 
 <body>
