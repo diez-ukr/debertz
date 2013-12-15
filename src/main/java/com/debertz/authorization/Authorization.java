@@ -20,13 +20,13 @@ public class Authorization
 		if (username.length() < 4) throw new Exception("Username can not be shorter then 4 digits.");
 		if (password.length() < 4) throw new Exception("Password can not be shorter then 4 digits.");
 
-		//if (Users.addUser(username, md5(password)))
-		//{
-		//	throw new Exception("User '" + username + "' already exists. Please, choose another username.");
-		//}
+		if (!Users.addUser(username, md5(password)))
+		{
+			throw new Exception("User '" + username + "' already exists. Please, choose another username.");
+		}
 		return true;
 	}
-	public static String authorizate(String username, String password) throws Exception
+	public static String authorize(String username, String password) throws Exception
 	{
 		if (username.equals("")) throw new Exception("Please, fill 'Username' field.");
 		if (password.equals("")) throw new Exception("Please, fill 'Password' field.");
