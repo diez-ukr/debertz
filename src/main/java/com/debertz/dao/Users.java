@@ -25,7 +25,7 @@ public class Users {
         return sid;
     }
 
-    private static synchronized  boolean validateUser(String user) {
+    public static synchronized  boolean validateUser(String user) {
         DBCursor cursor = collection.find(new BasicDBObject("name", user));
 	    return cursor.count() <= 0;
     }

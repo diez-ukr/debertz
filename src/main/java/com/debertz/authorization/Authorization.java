@@ -6,36 +6,57 @@ package com.debertz.authorization;
  */
 
 import com.debertz.dao.Users;
+import com.debertz.status.Status;
 
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.regex.Pattern;
+
 
 public class Authorization
 {
-	public static boolean register(String username, String password) throws Exception
+	public static Status.Authorization register(String username, String password)
 	{
-		if (username.equals("")) throw new Exception("Please, fill 'Username' field.");
-		if (password.equals("")) throw new Exception("Please, fill 'Password' field.");
-		if (username.length() < 4) throw new Exception("Username can not be shorter then 4 digits.");
-		if (password.length() < 4) throw new Exception("Password can not be shorter then 4 digits.");
-
+		Status.Authorization status;
+		status = validateLogin(username);
+		if (!Status.isSuccess(status))
+			return status;
+		status = validatePassword(password);
+		if (!Status.isSuccess(status))
+			return status;
 		if (!Users.addUser(username, md5(password)))
-		{
-			throw new Exception("User '" + username + "' already exists. Please, choose another username.");
-		}
-		return true;
+			return Status.Authorization.NotUniqueUsername;
+		return Status.Authorization.OK;
 	}
-	public static String authorize(String username, String password) throws Exception
+
+	public static Status.Authorization validateLogin(String username)
 	{
-		if (username.equals("")) throw new Exception("Please, fill 'Username' field.");
-		if (password.equals("")) throw new Exception("Please, fill 'Password' field.");
-		String sid = Users.generateSID(username, md5(password));
-		if(sid.equals(""))
-		{
-			throw new Exception("Username or Password is not correct");
-		}
-		return sid;
+		if (username.equals("")) return Status.Authorization.EmptyUsername;
+		String loginRegex = "^[A-Za-z0-9_-]{4,16}$";
+		if (!Pattern.compile(loginRegex).matcher(username).matches())
+			return Status.Authorization.InvalidUsername;
+		if (!Users.validateUser(username))
+			return Status.Authorization.NotUniqueUsername;
+		return Status.Authorization.OK;
+	}
+
+
+	public static Status.Authorization validatePassword(String password)
+	{
+		if (password.equals("")) return Status.Authorization.EmptyPassword;
+		if (password.length() <= 4) return Status.Authorization.TooShortPassword;
+		return Status.Authorization.OK;
+	}
+
+	public static String authorize(String username, String password) throws AuthorizationException
+	{
+		if(!Status.isSuccess(validateLogin(username)))
+			throw new AuthorizationException("Invalid login");
+		if(!Status.isSuccess(validatePassword(password)))
+			throw new AuthorizationException("Invalid password");
+
+		return Users.generateSID(username, md5(password));
 	}
 
 	public static boolean validateSid(String username, String sid)
