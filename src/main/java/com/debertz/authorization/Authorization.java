@@ -32,7 +32,7 @@ public class Authorization
 
 	public static Status.Authorization validateLogin(String username)
 	{
-		if (username.equals("")) return Status.Authorization.EmptyUsername;
+		if (username == null || username.isEmpty()) return Status.Authorization.EmptyUsername;
 		String loginRegex = "^[A-Za-z0-9_-]{4,16}$";
 		if (!Pattern.compile(loginRegex).matcher(username).matches())
 			return Status.Authorization.InvalidUsername;
@@ -44,7 +44,7 @@ public class Authorization
 
 	public static Status.Authorization validatePassword(String password)
 	{
-		if (password.equals("")) return Status.Authorization.EmptyPassword;
+		if (password == null || password.isEmpty()) return Status.Authorization.EmptyPassword;
 		if (password.length() <= 4) return Status.Authorization.TooShortPassword;
 		return Status.Authorization.OK;
 	}
