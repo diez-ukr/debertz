@@ -7,7 +7,7 @@
 
 <body>
 
-<%@include file="templates/header.jsp" %>
+<jsp:include page="/header"/>
 
 <div class="container">
     <div class="hero-unit">
