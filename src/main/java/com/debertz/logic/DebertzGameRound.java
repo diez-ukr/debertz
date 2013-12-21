@@ -38,6 +38,11 @@ public class DebertzGameRound
 		return trumpCard;
 	}
 
+	public void setTrumpSuit(PlayingCard.Suit trumpSuit)
+	{
+		this.trumpSuit = trumpSuit;
+	}
+
 	public boolean giveCards()
 	{
 		deck = new LinkedList<PlayingCard>();
@@ -61,23 +66,14 @@ public class DebertzGameRound
 		return true;
 	}
 
-	public boolean giveTalon(PlayingCard.Suit trumpSuit)
+	public boolean giveTalon()
 	{
-		this.trumpSuit = trumpSuit;
 		int cardCount = 6 - playersCount;
 		for (int i = 0; i < cardCount; i++)
 			for (DebertzGamePlayer player : debertzGamePlayers)
 				player.addCard(deck.removeFirst());
 		sortPlayersHands();
 		return true;
-	}
-
-	public boolean giveTalon(int turn)
-	{
-		if (turn < 0 || turn >= playersCount)
-			return false;
-		this.turn = turn;
-		return giveTalon(trumpCard.suit);
 	}
 
 	public LinkedList<PlayingCard> getPlayersHand(String name)
