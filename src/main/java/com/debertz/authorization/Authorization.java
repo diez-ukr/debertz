@@ -64,6 +64,11 @@ public class Authorization
 		return Users.validateSid(username, sid);
 	}
 
+	public static boolean validateSid(Object username, Object sid)
+	{
+		return !(username == null || sid == null) && Users.validateSid(username.toString(), sid.toString());
+	}
+
 	private static String md5(String input)
 	{
 		String md5 = null;
