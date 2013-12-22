@@ -6,9 +6,10 @@ import java.util.LinkedList;
 public class DebertzGamePlayer
 {
 
-	public DebertzGamePlayer(String playerName)
+	public DebertzGamePlayer(User user, Team team)
 	{
-		this.playerName = playerName;
+        this.team = team;
+		this.playerName = user.getName();
 		hand = new LinkedList<PlayingCard>();
 		tricks = new LinkedList<PlayingCard[]>();
 		combinations = null;
@@ -35,6 +36,49 @@ public class DebertzGamePlayer
 		}
 	}
 
+    public int getScore(PlayingCard.Suit trumpSuit)
+    {
+        int retval = 0;
+        for(DebertzCombination debertzCombination : this.combinations)
+            retval += debertzCombination.getPoints();
+        if(this.gotlastTrick)
+            retval += 10;
+        for(PlayingCard[] trick : this.tricks)
+        {
+            for(PlayingCard card : trick)
+            {
+                switch (card.rank)
+                {
+                    case Ace:
+                        retval += 11;
+                        break;
+                    case Ten:
+                        retval += 10;
+                        break;
+                    case King:
+                        retval += 4;
+                        break;
+                    case Queen:
+                        retval += 3;
+                        break;
+                    case Jack:
+                        if (card.suit == trumpSuit)
+                            retval += 20;
+                        else
+                            retval += 2;
+                        break;
+                    case Nine:
+                        if (card.suit == trumpSuit)
+                            retval += 14;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+        return retval;
+    }
+
 	public void sortHand()
 	{
 		Collections.sort(hand, new PlayingCard.PlayingCardComparator());
@@ -47,11 +91,17 @@ public class DebertzGamePlayer
 				return true;
 		return false;
 	}
-	public LinkedList<PlayingCard[]> tricks;
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public LinkedList<PlayingCard[]> tricks;
 	public int points;
 
 	public String playerName;
 	public volatile LinkedList<PlayingCard> hand;
 	public LinkedList<DebertzCombination> combinations;
 	public boolean gotlastTrick;
+    private Team team;
 }

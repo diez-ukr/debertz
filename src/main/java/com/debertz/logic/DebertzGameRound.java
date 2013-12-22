@@ -23,14 +23,18 @@ public class DebertzGameRound
 
 	private int turn;
 
-	public boolean Init(DebertzGamePlayer[] players)
+    public PlayingCard.Suit getTrumpSuit() {
+        return trumpSuit;
+    }
+
+    public DebertzGameRound(DebertzGamePlayer[] players) throws PlayersCountException
 	{
 		debertzGamePlayers = players;
 		playersCount = players.length;
 		currentTrick = new PlayingCard[playersCount];
 		for (int i = 0; i < playersCount; i++)
 			currentTrick[i] = null;
-		return !(playersCount < 2 || playersCount > 4);
+		throw new PlayersCountException("Players count must be between 1 and 4");
 	}
 
 	public PlayingCard getTrumpCard()
@@ -168,55 +172,6 @@ public class DebertzGameRound
 		return false;
 	}
 
-	public int getScore(String name)
-	{
-		for(DebertzGamePlayer p : debertzGamePlayers)
-		{
-			if (p.playerName.equals(name))
-			{
-				int retval = 0;
-				for(DebertzCombination debertzCombination : p.combinations)
-					retval += debertzCombination.getPoints();
-				if(p.gotlastTrick)
-					retval += 10;
-				for(PlayingCard[] trick : p.tricks)
-				{
-					for(PlayingCard card : trick)
-					{
-						switch (card.rank)
-						{
-							case Ace:
-								retval += 11;
-								break;
-							case Ten:
-								retval += 10;
-								break;
-							case King:
-								retval += 4;
-								break;
-							case Queen:
-								retval += 3;
-								break;
-							case Jack:
-								if (card.suit == trumpSuit)
-									retval += 20;
-								else
-									retval += 2;
-								break;
-							case Nine:
-								if (card.suit == trumpSuit)
-									retval += 14;
-								break;
-							default:
-							    break;
-						}
-					}
-				}
-				return retval;
-			}
-		}
-		return -1;
-	}
 
 	private int getHighestCard(PlayingCard[] cards)
 	{
