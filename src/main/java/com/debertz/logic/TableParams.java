@@ -5,6 +5,7 @@ package com.debertz.logic;
  */
 public class TableParams {
     private int playersCount;
+    private int maxPoints;
 
     public TableParams(int playersCount, int maxPoints) {
         this.playersCount = playersCount;
@@ -19,5 +20,8 @@ public class TableParams {
         return maxPoints;
     }
 
-    private int maxPoints;
+    @Override
+    public String toString() {
+        return "Count of players: " + playersCount + "; Maximum points: " + maxPoints;
+    }
 }

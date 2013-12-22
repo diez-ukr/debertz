@@ -11,6 +11,9 @@ public class Table {
     private long id;
     private CopyOnWriteArrayList<User> players;
 
+    public TableParams getParams() {
+        return params;
+    }
     public long getId() {
         return id;
     }
