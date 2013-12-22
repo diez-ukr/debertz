@@ -24,6 +24,16 @@
         <servlet-class>com.debertz.servlet.MainServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>Tables</servlet-name>
+        <servlet-class>com.debertz.servlet.TablesServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Tables</servlet-name>
+        <url-pattern>/tables</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>Main</servlet-name>
         <url-pattern>/main</url-pattern>

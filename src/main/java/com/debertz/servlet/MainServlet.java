@@ -19,5 +19,6 @@ public class MainServlet extends HttpServlet {
             resp.sendRedirect("/");
             return;
         }
+        getServletContext().getRequestDispatcher("/main.jsp").forward(req, resp);
     }
 }
