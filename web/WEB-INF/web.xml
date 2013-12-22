@@ -4,5 +4,43 @@
            xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
            version="2.5">
+    <servlet>
+        <servlet-name>Register</servlet-name>
+        <servlet-class>com.debertz.servlet.RegisterServlet</servlet-class>
+    </servlet>
 
+    <servlet>
+        <servlet-name>PageHeader</servlet-name>
+        <servlet-class>com.debertz.servlet.HeaderServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>Authorize</servlet-name>
+        <servlet-class>com.debertz.servlet.AuthorizeServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>Main</servlet-name>
+        <servlet-class>com.debertz.servlet.MainServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Main</servlet-name>
+        <url-pattern>/main</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Authorize</servlet-name>
+        <url-pattern>/authorize</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Register</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>PageHeader</servlet-name>
+        <url-pattern>/header</url-pattern>
+    </servlet-mapping>
 </web-app>

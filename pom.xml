@@ -8,5 +8,19 @@
     <artifactId>debertz</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <repositories>
+        <repository>
+            <id>ext</id>
+            <name>external libraries</name>
+            <url>${project.basedir}/ext</url>
+        </repository>
+    </repositories>
 
+    <dependencies>
+        <dependency>
+            <groupId>com</groupId>
+            <artifactId>mongo</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
 </project>

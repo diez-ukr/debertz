@@ -1,50 +1,45 @@
-<%@ page import="com.debertz.authorization.Authorization" %><%
-    if (!request.getParameterMap().isEmpty()){
-        try {
-            Authorization.register(request.getParameter("login"), request.getParameter("password"));
-            response.sendRedirect("index.jsp");
-        }
-        catch (Exception ex){%>
-        alert(<%=ex.toString()%>);
-<%
-        }
-    }
-%>
+<%@ page import="com.debertz.status.Status" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <%@include file="templates/bootstrap-include.jsp" %>
     <title>Register</title>
 </head>
-
 <body>
 <div class="container">
     <div class="row">
         <div class="span8">
-            <form class="form-horizontal" method="post">
+            <form class="form-horizontal" method="post" action="/register">
                 <fieldset>
-
                     <legend>Registration</legend>
-
+                    <div id="alertMsg" class="alert alert-error" style="display: none">
+                        <a class="close" data-dismiss="alert">x</a>
+                        ${requestScope.status.toString()}
+                    </div>
                     <div class="control-group">
                         <label class="control-label">Login</label>
+
                         <div class="controls">
-                            <input type="text" class="input-xlarge" name="login" data-original-title="Login">
+                            <input id="login_input" type="text" class="input-xlarge" name="login"
+                                   data-original-title="Login">
                         </div>
                     </div>
 
 
                     <div class="control-group">
                         <label class="control-label">Password</label>
+
                         <div class="controls">
-                            <input type="password" class="input-xlarge" name="password" data-original-title="Password">
+                            <input id="password_input" type="password" class="input-xlarge" name="password"
+                                   data-original-title="Password">
                         </div>
                     </div>
 
                     <div class="control-group">
                         <label class="control-label"></label>
+
                         <div class="controls">
-                            <button type="submit" class="btn btn-success" >Create Account</button>
+                            <button type="submit" class="btn btn-success">Create Account</button>
                         </div>
                     </div>
                 </fieldset>
@@ -52,5 +47,11 @@
         </div>
     </div>
 </div>
+<script>
+<%if (request.getAttribute("status") != null &&
+        request.getAttribute("status") != Status.Authorization.OK.toString()){%>
+        $(".alert").show();
+<%}%>
+</script>
 </body>
 </html>
