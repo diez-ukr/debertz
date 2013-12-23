@@ -1,5 +1,6 @@
 package com.debertz.dao;
 
+import com.debertz.logic.User;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -23,6 +24,13 @@ public class Users {
         String sid = Integer.toString(new Integer(rand.nextInt(1000000)).hashCode());
         collection.update(new BasicDBObject("name", name), new BasicDBObject("$set", new BasicDBObject("sid", sid)));
         return sid;
+    }
+
+    public static synchronized User getUser(String name) {
+        if (validateUser(name)) {
+            return new User(name);
+        }
+        return null;
     }
 
     public static synchronized  boolean validateUser(String user) {

@@ -19,7 +19,7 @@ public class Main
 //		Collections.sort(cards, new PlayingCard.PlayingCardComparator());
 //		for(PlayingCard c : cards)
 //			System.out.println(c);
-        Tables.add(new Table(new TableParams(4, 501), new User("shlololo"),100 ));
+        //Tables.add(new Table(new TableParams(4, 501), new User("shlololo"),100 ));
         //System.out.println(Tables.get(2));
 	}
 }

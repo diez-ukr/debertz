@@ -34,13 +34,17 @@ public class Table extends ReflectionDBObject {
         return creator;
     }
 
-    synchronized boolean join(User player) {
+    public synchronized boolean join(User player) {
+        if (TablePool.get(player) != null) return false;
         if (players.size() < params.getPlayersCount()) {
             boolean result = players.add(player);
         }
         return false;
     }
-    synchronized boolean leave(User player) {
+    public synchronized boolean leave(User player) {
+        if (player.equals(creator)) {
+            TablePool.remove(this);
+        }
         if (players.contains(player)) {
             return players.remove(player);
         }
