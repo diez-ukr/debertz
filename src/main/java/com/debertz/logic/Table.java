@@ -1,11 +1,15 @@
 package com.debertz.logic;
 
+import com.mongodb.ReflectionDBObject;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Created by eluppol on 17.12.13.
  */
-public class Table {
+public class Table extends ReflectionDBObject {
     private TableParams params;
     private User creator;
     private long id;
@@ -30,13 +34,13 @@ public class Table {
         return creator;
     }
 
-    public synchronized boolean join(User player) {
+    synchronized boolean join(User player) {
         if (players.size() < params.getPlayersCount()) {
-            return players.add(player);
+            boolean result = players.add(player);
         }
         return false;
     }
-    public synchronized boolean leave(User player) {
+    synchronized boolean leave(User player) {
         if (players.contains(player)) {
             return players.remove(player);
         }
@@ -51,6 +55,14 @@ public class Table {
         return new Game(players, params);
     }
 
+    public List<User> getPlayers() {
+        List<User> result = new ArrayList<User>();
+        for (User user : players) {
+            result.add(user);
+        }
+        return result;
+    }
+
     public void swapDown(User user) {
         int index = players.indexOf(user);
         if (index < players.size() - 1) {
@@ -61,6 +73,25 @@ public class Table {
     }
     public User getUser(int index) {
         return players.get(index);
+    }
+
+    public void setParams(TableParams params) {
+        this.params = params;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setPlayers(List<User> players) {
+        this.players = new CopyOnWriteArrayList<User>();
+        for (User user : players) {
+            this.players.add(user);
+        }
     }
 
     @Override
