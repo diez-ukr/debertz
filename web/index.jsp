@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta http-equiv="refresh" content="1asskjahs">
     <%@include file="templates/bootstrap-include.jsp"%>
     <title>Debertz Online</title>
 </head>

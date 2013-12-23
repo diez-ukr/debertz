@@ -2,6 +2,7 @@
     <div class="navbar-inner">
         <div class="container">
             <a class="brand" href="#">Debertz</a>
+
             <div class="nav-collapse collapse">
                 <form class="navbar-form pull-right" method="post" action="/authorize">
                     <input class="span2" type="text" name="login" placeholder="Login">

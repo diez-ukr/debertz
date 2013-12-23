@@ -4,9 +4,8 @@
             <a class="brand" href="#">Debertz</a>
 
             <div class="nav-collapse collapse">
-                <p class="navbar-text">Logged in as <%= request.getAttribute("username").toString() %>
-                </p>
-                <button type="button" class="btn btn-primary">Logout</button>
+                <p class="navbar-text pull-left">Logged in as: <b><%=session.getAttribute("login")%></b></p>
+                <a class="btn btn-success pull-right" href="/authorize">Sign out</a>
             </div>
         </div>
     </div>
