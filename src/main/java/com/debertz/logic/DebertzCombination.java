@@ -19,7 +19,7 @@ public class DebertzCombination
 				points = 20;
 				break;
 			case 4:
-				points = 20;
+				points = 50;
 		}
 		if (cards.size() == 2) points = 20;
 		isPlaying = false;

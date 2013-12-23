@@ -13,7 +13,8 @@ public class PlayingCard
 		Jack,
 		Queen,
 		King,
-		Ace
+		Ace,
+		UNKNOWN
 	}
 
 	public enum Suit
@@ -21,7 +22,8 @@ public class PlayingCard
 		Spade,
 		Club,
 		Diamond,
-		Heart
+		Heart,
+		UNKNOWN
 	}
 
 	public final Rank rank;
@@ -61,5 +63,35 @@ public class PlayingCard
 				return o1.suit.compareTo(o2.suit);
 			return o1.rank.compareTo(o2.rank);
 		}
+	}
+
+	public static String getResourceName(PlayingCard card)
+	{
+		String retval = "img/cards/";
+		switch (card.suit)
+		{
+			case Spade: retval += "Spades "; break;
+			case Club: retval += "Clubs "; break;
+			case Diamond: retval += "Diamonds "; break;
+			case Heart: retval += "Hearts "; break;
+			case UNKNOWN:
+				retval += "unknown.png";
+				return retval;
+		}
+		switch (card.rank)
+		{
+			case Ace: retval += "1"; break;
+			case Seven: retval += "7"; break;
+			case Eight: retval += "8"; break;
+			case Nine: retval += "9"; break;
+			case Ten: retval += "10"; break;
+			case Jack: retval += "11"; break;
+			case Queen: retval += "12"; break;
+			case King: retval += "13"; break;
+			case UNKNOWN:
+				retval += "unknown.png";
+				return retval;
+		}
+		return retval + ".png";
 	}
 }
