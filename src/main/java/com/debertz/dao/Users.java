@@ -35,15 +35,15 @@ public class Users {
 
     public static synchronized  boolean validateUser(String user) {
         DBCursor cursor = collection.find(new BasicDBObject("name", user));
-	    return cursor.count() <= 0;
+	    return cursor.count() > 0;
     }
 
     private static synchronized  boolean validatePassword(String user, String pass) {
         DBCursor cursor = collection.find(new BasicDBObject("name", user).append("password", pass));
-	    return cursor.count() != 0;
+	    return cursor.count() > 0;
     }
     public static synchronized  boolean validateSid(String user, String sid) {
         DBCursor cursor = collection.find(new BasicDBObject("name", user).append("password", sid));
-	    return cursor.count() != 0;
+	    return cursor.count() > 0;
     }
 }
