@@ -1,9 +1,11 @@
 package com.debertz.logic;
 
+import com.mongodb.ReflectionDBObject;
+
 /**
  * Created by eluppol on 22.12.13.
  */
-public class TableParams {
+public class TableParams extends ReflectionDBObject {
     private int playersCount;
     private int maxPoints;
 
@@ -18,6 +20,14 @@ public class TableParams {
 
     public int getMaxPoints() {
         return maxPoints;
+    }
+
+    public void setPlayersCount(int playersCount) {
+        this.playersCount = playersCount;
+    }
+
+    public void setMaxPoints(int maxPoints) {
+        this.maxPoints = maxPoints;
     }
 
     @Override

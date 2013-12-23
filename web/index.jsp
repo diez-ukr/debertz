@@ -6,9 +6,7 @@
 </head>
 
 <body>
-
 <jsp:include page="/header"/>
-
 <div class="container">
     <div class="hero-unit">
         <h1>Hello, fucking world!</h1>
