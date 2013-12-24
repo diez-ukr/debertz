@@ -13,7 +13,7 @@ import java.util.Random;
 public class Users {
     private static DBCollection collection = ConnectionPool.getConnection().getDB("debertz").getCollection("users");
     public static synchronized boolean addUser(String name, String password) {
-        if (!validateUser(name))
+        if (validateUser(name))
             return false;
         collection.insert(new BasicDBObject("name", name).append("password", password));
         return true;
