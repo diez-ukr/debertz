@@ -57,7 +57,9 @@ public class Table extends ReflectionDBObject {
     }
 
     public synchronized Game startGame() {
-        currentGame = new Game(players, params);
+        if (ready()) {
+            currentGame = new Game(players, params);
+        }
         return currentGame;
     }
 
