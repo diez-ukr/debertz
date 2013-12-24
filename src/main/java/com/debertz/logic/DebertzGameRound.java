@@ -30,7 +30,7 @@ public class DebertzGameRound
         return trumpSuit;
     }
 
-    public DebertzGameRound(DebertzGamePlayer[] players) throws PlayersCountException
+    public DebertzGameRound(DebertzGamePlayer[] players)
 	{
 
 		debertzGamePlayers = players;

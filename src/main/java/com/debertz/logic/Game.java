@@ -24,7 +24,7 @@ public class Game {
         }
     }
 
-    public DebertzGameRound nextRound() throws PlayersCountException {
+    public DebertzGameRound nextRound() {
         DebertzGamePlayer[] players = new DebertzGamePlayer[users.size()];
         for (int i=0; i<players.length;i++) {
             players[i] = new DebertzGamePlayer(users.get(i));
