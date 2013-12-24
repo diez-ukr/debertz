@@ -33,6 +33,12 @@
         </table>
     </div>
 </div>
-
+<script>
+    var response = 0;
+    while (response == 0)
+    {
+        
+    }
+</script>
 </body>
 </html>

@@ -34,7 +34,8 @@ public class TableServlet extends HttpServlet {
             tableSelected.join(userCurrent);
             resp.sendRedirect("/table");
         } else if (req.getParameter("startGame") != null) {
-
+            tableCurrent.startGame();
+            resp.sendRedirect("/game");
         } else {
             req.setAttribute(tableCurrent.getParams().toString(),
                     userCurrent.getName());
