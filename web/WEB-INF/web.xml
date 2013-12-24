@@ -34,6 +34,16 @@
         <servlet-class>com.debertz.servlet.NewTableServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>Table</servlet-name>
+        <servlet-class>com.debertz.servlet.TableServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Table</servlet-name>
+        <url-pattern>/table</url-pattern>
+    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>NewTable</servlet-name>
         <url-pattern>/newTable</url-pattern>
