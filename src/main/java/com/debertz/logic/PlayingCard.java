@@ -6,6 +6,12 @@ public class PlayingCard
 {
 	public enum Rank
 	{
+		Ace,
+		Two,
+		Three,
+		Four,
+		Five,
+		Six,
 		Seven,
 		Eight,
 		Nine,
@@ -13,7 +19,6 @@ public class PlayingCard
 		Jack,
 		Queen,
 		King,
-		Ace,
 		UNKNOWN
 	}
 
