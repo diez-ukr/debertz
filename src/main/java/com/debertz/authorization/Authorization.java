@@ -36,7 +36,7 @@ public class Authorization
 		String loginRegex = "^[A-Za-z0-9_-]{4,16}$";
 		if (!Pattern.compile(loginRegex).matcher(username).matches())
 			return Status.Authorization.InvalidUsername;
-		if (!Users.validateUser(username))
+		if (Users.validateUser(username))
 			return Status.Authorization.NotUniqueUsername;
 		return Status.Authorization.OK;
 	}
