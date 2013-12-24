@@ -19,10 +19,7 @@ public class TableServlet extends HttpServlet {
         HttpSession session = req.getSession();
         User userCurrent = (User) session.getAttribute(AttributeNames.USER_PARAM);
         Table tableCurrent = TablePool.get(userCurrent);
-        if (tableCurrent == null){
-            getServletContext().getRequestDispatcher("/main.jsp").forward(req, resp);
-            return;
-        }
+
         if (req.getParameter("join") != null) {
             if (tableCurrent != null){
                 tableCurrent.leave(userCurrent);
@@ -34,8 +31,25 @@ public class TableServlet extends HttpServlet {
             tableSelected.join(userCurrent);
             resp.sendRedirect("/table");
         } else if (req.getParameter("startGame") != null) {
-
+            try {
+                tableCurrent.startGame().nextRound();
+            } catch (PlayersCountException e) {
+                e.printStackTrace();
+            }
+            resp.sendRedirect("/game");
+        } else if (req.getParameter("gameStatus") != null){
+            if (tableCurrent.getCurrentGame() != null){
+                resp.getWriter().append('1');
+            }
+            else{
+                resp.getWriter().append('0');
+            }
+            return;
         } else {
+            if (tableCurrent == null){
+                getServletContext().getRequestDispatcher("/main.jsp").forward(req, resp);
+                return;
+            }
             req.setAttribute(tableCurrent.getParams().toString(),
                     userCurrent.getName());
             getServletContext().getRequestDispatcher("/table.jsp").forward(req, resp);
