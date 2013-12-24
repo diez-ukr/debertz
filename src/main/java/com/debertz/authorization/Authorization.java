@@ -51,10 +51,7 @@ public class Authorization
 
 	public static String authorize(String username, String password) throws AuthorizationException
 	{
-		if(!Status.isSuccess(validateLogin(username)))
-			throw new AuthorizationException("Invalid login");
-		if(!Status.isSuccess(validatePassword(password)))
-			throw new AuthorizationException("Invalid password");
+
 
 		return Users.generateSID(username, md5(password));
 	}
