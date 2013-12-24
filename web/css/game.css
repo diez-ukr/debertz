@@ -1,0 +1,150 @@
+.north
+{
+    width: 70%;
+    height: 25%;
+    top: 5%;
+    left: 15%;
+    background-color: #ffffff;
+    position: absolute;
+}
+
+.south
+{
+    width: 70%;
+    height: 25%;
+    bottom: 5%;
+    left: 15%;
+    background-color: red;
+    position: absolute;
+}
+
+.west
+{
+    width: 12%;
+    height: 80%;
+    bottom: 10%;
+    left: 2%;
+    background-color: white;
+    position: absolute;
+}
+
+.east
+{
+    width: 12%;
+    height: 80%;
+    bottom: 10%;
+    right: 2%;
+    background-color: white;
+    position: absolute;
+}
+
+.topName
+{
+    width: 70%;
+    height: 3%;
+    top: 1%;
+    left: 15%;
+    background-color: white;
+    position: absolute;
+}
+
+.leftName
+{
+    width: 12%;
+    height: 3%;
+    top: 7%;
+    left: 2%;
+    background-color: yellow;
+    position: absolute;
+}
+
+.rightName
+{
+    width: 12%;
+    height: 3%;
+    top: 7%;
+    right: 2%;
+    background-color: yellow;
+    position: absolute;
+}
+
+.vertical-card
+{
+    top: 5%;
+    height: 90%;
+    width: 12%;
+    float: left;
+    position: relative;
+}
+
+.playing-card-image
+{
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    border-collapse: collapse;
+    border: solid;
+    border-color: rgba(0, 0, 0, 0);
+
+
+}
+
+.playing-card-image:hover
+{
+    border-color: rgba(8, 255, 8, 1);
+}
+
+.moreButton
+{
+    width: 10%;
+    height: 6%;
+    bottom: 35%;
+    left: 30%;
+    background-color: blue;
+    position: absolute;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.enoughButton
+{
+    width: 10%;
+    height: 6%;
+    bottom: 35%;
+    right: 30%;
+    background-color: blue;
+    position: absolute;
+    font-weight: bold;
+    font-style: italic;
+    font-family: sans-serif;
+}
+
+.points
+{
+    width: 10%;
+    height: 6%;
+    bottom: 35%;
+    right: 45%;
+    background-color: blue;
+    position: absolute;
+    font-variant: small-caps;
+    font-weight: bold;
+    font-family: cursive;
+}
+
+.gameMessage
+{
+    width: 20%;
+    height: 10%;
+    bottom: 55%;
+    right: 40%;
+    background-color: blue;
+    position: absolute;
+    font-variant: small-caps;
+    font-weight: bolder;
+    font-size: large;
+}
+
+body
+{
+    background-color: green;
+}
