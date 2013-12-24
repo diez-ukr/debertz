@@ -31,6 +31,15 @@ public class TablePool {
         return null;
     }
 
+    public static Table get(User user) {
+        for (Table table : tables) {
+            if (table.getPlayers().contains(user)) {
+                return table;
+            }
+        }
+        return null;
+    }
+
     public static long[] getAll() {
         synchronized (tables) {
             long[] result = new long[tables.size()];

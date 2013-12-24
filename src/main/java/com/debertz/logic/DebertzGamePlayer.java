@@ -16,7 +16,11 @@ public class DebertzGamePlayer
 		gotlastTrick = false;
 	}
 
-	public boolean addCard(PlayingCard card)
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public boolean addCard(PlayingCard card)
 	{
 		hand.add(card);
 		return true;

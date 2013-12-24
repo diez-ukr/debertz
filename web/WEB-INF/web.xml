@@ -25,13 +25,23 @@
     </servlet>
 
     <servlet>
-        <servlet-name>Tables</servlet-name>
-        <servlet-class>com.debertz.servlet.TablesServlet</servlet-class>
+        <servlet-name>TableList</servlet-name>
+        <servlet-class>com.debertz.servlet.TableListServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>NewTable</servlet-name>
+        <servlet-class>com.debertz.servlet.NewTableServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>Tables</servlet-name>
-        <url-pattern>/tables</url-pattern>
+        <servlet-name>NewTable</servlet-name>
+        <url-pattern>/newTable</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>TableList</servlet-name>
+        <url-pattern>/tableList</url-pattern>
     </servlet-mapping>
 
     <servlet-mapping>

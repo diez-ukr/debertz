@@ -1,5 +1,6 @@
 package com.debertz.dao;
 
+import com.debertz.logic.User;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -25,17 +26,24 @@ public class Users {
         return sid;
     }
 
+    public static synchronized User getUser(String name) {
+        if (validateUser(name)) {
+            return new User(name);
+        }
+        return null;
+    }
+
     public static synchronized  boolean validateUser(String user) {
         DBCursor cursor = collection.find(new BasicDBObject("name", user));
-	    return cursor.count() <= 0;
+	    return cursor.count() > 0;
     }
 
     private static synchronized  boolean validatePassword(String user, String pass) {
         DBCursor cursor = collection.find(new BasicDBObject("name", user).append("password", pass));
-	    return cursor.count() != 0;
+	    return cursor.count() > 0;
     }
     public static synchronized  boolean validateSid(String user, String sid) {
         DBCursor cursor = collection.find(new BasicDBObject("name", user).append("password", sid));
-	    return cursor.count() != 0;
+	    return cursor.count() > 0;
     }
 }
