@@ -3,6 +3,7 @@ package com.debertz.servlet;
 import com.debertz.authorization.Authorization;
 import com.debertz.authorization.AuthorizationException;
 import com.debertz.dao.Users;
+import com.debertz.logic.User;
 import com.debertz.status.Status;
 
 import javax.servlet.ServletException;
@@ -17,15 +18,20 @@ import java.io.IOException;
  */
 public class AuthorizeServlet extends HttpServlet {
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        HttpSession session = req.getSession();
+        User userCurrent = (User)session.getAttribute(AttributeNames.USER_PARAM);
+        if (userCurrent != null)
+        {
+            session.removeAttribute(AttributeNames.SID_PARAM);
+            session.removeAttribute(AttributeNames.USER_PARAM);
+            resp.sendRedirect("/");
+        }
+    }
+
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        if (session.getAttribute("sid") != null)
-        {
-            session.removeAttribute("sid");
-            session.removeAttribute("login");
-            resp.sendRedirect("/");
-            return;
-        }
         String name = req.getParameter(AttributeNames.NAME_PARAM);
         String password = req.getParameter(AttributeNames.PASSWORD_PARAM);
         String sid = "";

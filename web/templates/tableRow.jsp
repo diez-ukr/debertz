@@ -1,5 +1,5 @@
 <tr style="border-top-width: 2px">
-    <td><b>Players: </b>${requestScope.user}</td>
+    <td><b>Players: </b>${requestScope.users}</td>
 </tr>
 <tr>
     <td colspan="2">
