@@ -15,8 +15,10 @@
         </a>
     </div>
 
-    <%if (((Table)session.getAttribute("table")).getCreator()
-            == session.getAttribute("user")){%>
+    <%
+        User userCurrent = (User)session.getAttribute("user");
+        if (TablePool.get(userCurrent).getCreator() == userCurrent) {
+    %>
     <div style="margin: 5px;">
         <a class="btn btn-primary btn-lg" href="/game">
             Start Game
@@ -33,6 +35,22 @@
         </table>
     </div>
 </div>
+<script>
+    var response = 0;
+    (function worker() {
+        $.ajax({
+            url: "/table",
+            data: 'gameStatus',
+            success: function (resp) {
+                if (resp == '1')
+                {
+                    document.location.href = "/game";
+                }
+                setTimeout(worker, 500);
+            }
+        });
+    })();
 
+</script>
 </body>
 </html>

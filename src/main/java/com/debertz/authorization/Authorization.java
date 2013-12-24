@@ -36,7 +36,7 @@ public class Authorization
 		String loginRegex = "^[A-Za-z0-9_-]{4,16}$";
 		if (!Pattern.compile(loginRegex).matcher(username).matches())
 			return Status.Authorization.InvalidUsername;
-		if (!Users.validateUser(username))
+		if (Users.validateUser(username))
 			return Status.Authorization.NotUniqueUsername;
 		return Status.Authorization.OK;
 	}
@@ -51,10 +51,7 @@ public class Authorization
 
 	public static String authorize(String username, String password) throws AuthorizationException
 	{
-		if(!Status.isSuccess(validateLogin(username)))
-			throw new AuthorizationException("Invalid login");
-		if(!Status.isSuccess(validatePassword(password)))
-			throw new AuthorizationException("Invalid password");
+
 
 		return Users.generateSID(username, md5(password));
 	}
