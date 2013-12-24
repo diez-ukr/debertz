@@ -10,6 +10,7 @@ public class Game {
     private CopyOnWriteArrayList<User> users;
     private CopyOnWriteArrayList<Team> teams;
     private TableParams params;
+    private DebertzGameRound currentRound;
     private ArrayList<DebertzGameRound> rounds = new ArrayList<DebertzGameRound>();
 
     public Game(CopyOnWriteArrayList<User> players, TableParams params) {
@@ -30,7 +31,12 @@ public class Game {
         for (int i=0; i<players.length;i++) {
             players[i] = new DebertzGamePlayer(users.get(i), getUserTeam(users.get(i)));
         }
-        return new DebertzGameRound(players);
+        currentRound = new DebertzGameRound(players);
+        return currentRound;
+    }
+
+    public DebertzGameRound getCurrentRound() {
+        return currentRound;
     }
 
     public Team getUserTeam(User user) throws PlayerWithoutTeamException {

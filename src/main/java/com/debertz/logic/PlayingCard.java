@@ -6,6 +6,12 @@ public class PlayingCard
 {
 	public enum Rank
 	{
+		Ace,
+		Two,
+		Three,
+		Four,
+		Five,
+		Six,
 		Seven,
 		Eight,
 		Nine,
@@ -13,7 +19,6 @@ public class PlayingCard
 		Jack,
 		Queen,
 		King,
-		Ace,
 		UNKNOWN
 	}
 
@@ -70,27 +75,23 @@ public class PlayingCard
 		String retval = "img/cards/";
 		switch (card.suit)
 		{
-			case Spade: retval += "Spades "; break;
-			case Club: retval += "Clubs "; break;
-			case Diamond: retval += "Diamonds "; break;
-			case Heart: retval += "Hearts "; break;
+			case Spade: retval += "Spades%20"; break;
+			case Club: retval += "Clubs%20"; break;
+			case Diamond: retval += "Diamonds%20"; break;
+			case Heart: retval += "Hearts%20"; break;
 			case UNKNOWN:
 				retval += "unknown.png";
 				return retval;
 		}
 		switch (card.rank)
 		{
-			case Ace: retval += "1"; break;
-			case Seven: retval += "7"; break;
-			case Eight: retval += "8"; break;
-			case Nine: retval += "9"; break;
-			case Ten: retval += "10"; break;
-			case Jack: retval += "11"; break;
-			case Queen: retval += "12"; break;
-			case King: retval += "13"; break;
+
 			case UNKNOWN:
 				retval += "unknown.png";
 				return retval;
+			default:
+				retval += String.valueOf(card.rank.ordinal() + 1);
+
 		}
 		return retval + ".png";
 	}

@@ -10,6 +10,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * Created by eluppol on 17.12.13.
  */
 public class Table extends ReflectionDBObject {
+    private Game currentGame;
     private TableParams params;
     private User creator;
     private long id;
@@ -57,7 +58,12 @@ public class Table extends ReflectionDBObject {
     }
 
     public synchronized Game startGame() {
-        return new Game(players, params);
+        currentGame = new Game(players, params);
+        return currentGame;
+    }
+
+    public Game getCurrentGame() {
+        return currentGame;
     }
 
     public List<User> getPlayers() {
