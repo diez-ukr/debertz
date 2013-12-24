@@ -1,5 +1,7 @@
 package com.debertz.logic;
 
+import com.debertz.dao.Users;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -16,9 +18,9 @@ public class DebertzGameRound
 	private PlayingCard[] currentTrick;
 	private PlayingCard[] lastTrick;
 
-	public int getTurn()
+	public DebertzGamePlayer getTurn()
 	{
-		return turn;
+		return debertzGamePlayers[turn];
 	}
 
 	private int turn;
