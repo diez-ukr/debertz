@@ -1,3 +1,3 @@
 <tr>
-    <td>${requestScope.player}</td>
+    <td>${requestScope.login}</td>
 </tr>

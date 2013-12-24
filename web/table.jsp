@@ -16,7 +16,7 @@
     </div>
 
     <%if (((Table)session.getAttribute("table")).getCreator()
-            == (User)session.getAttribute("user")){%>
+            == session.getAttribute("user")){%>
     <div style="margin: 5px;">
         <a class="btn btn-primary btn-lg" href="/game">
             Start Game
@@ -27,9 +27,9 @@
     <div>
         <table class="table table-bordered">
             <tr>
-                <th>Players</th>
+                <th>Players:</th>
             </tr>
-
+            <jsp:include page="/playerList"/>
         </table>
     </div>
 </div>

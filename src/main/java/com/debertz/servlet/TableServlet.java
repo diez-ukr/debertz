@@ -13,25 +13,25 @@ import java.io.IOException;
  * Created by Sholtun on 23.12.13.
  */
 public class TableServlet extends HttpServlet {
-    private static final String CMD_EXIT = "exit";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        Table tableCurrent = (Table) session.getAttribute(AttributeNames.TABLE_PARAM);
         User userCurrent = (User) session.getAttribute(AttributeNames.USER_PARAM);
-
+        Table tableCurrent = TablePool.get(userCurrent);
+        if (tableCurrent == null){
+            getServletContext().getRequestDispatcher("/main.jsp").forward(req, resp);
+            return;
+        }
         if (req.getParameter("join") != null) {
             if (tableCurrent != null){
                 tableCurrent.leave(userCurrent);
-                session.setAttribute(AttributeNames.TABLE_PARAM, null);
                 resp.sendRedirect("/main");
                 return;
             }
             String tableID = req.getParameter(AttributeNames.TABLE_PARAM);
             Table tableSelected = TablePool.get(Integer.parseInt(tableID));
             tableSelected.join(userCurrent);
-            session.setAttribute(AttributeNames.TABLE_PARAM, tableSelected);
             resp.sendRedirect("/table");
         } else if (req.getParameter("startGame") != null) {
 

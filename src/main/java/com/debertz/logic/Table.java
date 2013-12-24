@@ -36,12 +36,11 @@ public class Table extends ReflectionDBObject {
     }
 
     public synchronized boolean join(User player) {
-        boolean result = false;
-        if (TablePool.get(player) != null) return result;
+        if (TablePool.get(player) != null) return false;
         if (players.size() < params.getPlayersCount()) {
-            result = players.add(player);
+            return players.add(player);
         }
-        return result;
+        return false;
     }
     public synchronized boolean leave(User player) {
         if (player.equals(creator)) {
