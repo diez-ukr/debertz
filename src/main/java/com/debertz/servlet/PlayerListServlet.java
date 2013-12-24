@@ -16,7 +16,7 @@ import java.io.IOException;
 public class PlayerListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User userCurrent = (User)req.getSession().getAttribute(AttributeNames.NAME_PARAM);
+        User userCurrent = (User)req.getSession().getAttribute(AttributeNames.USER_PARAM);
         Table tableCurrent = TablePool.get(userCurrent);
         for(User user: tableCurrent.getPlayers()){
             req.setAttribute(AttributeNames.NAME_PARAM, user.getName());

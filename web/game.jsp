@@ -1,4 +1,5 @@
 <%@ page import="com.debertz.logic.PlayingCard" %>
+<%@ page import="java.util.LinkedList" %>
 <%--
   Created by IntelliJ IDEA.
   User: diezu_000
@@ -10,8 +11,9 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>piska-pipiska</title>
+    <title>Game</title>
     <link rel="stylesheet" href="css/game.css" />
+    <jsp:include page="templates/bootstrap-include.jsp"/>
 </head>
 <body>
 <div class="north">
@@ -22,40 +24,40 @@
 </div>
 
 <div class="south">
-    <%! String cardUrl = PlayingCard.getResourceName(new PlayingCard(PlayingCard.Rank.King, PlayingCard.Suit.Club));%>
+    <%
+        LinkedList<PlayingCard> cards = (LinkedList<PlayingCard>)request.getAttribute("cards");
+        for(PlayingCard card: cards){
+            String cardUrl = PlayingCard.getResourceName(card);
+    %>
     <div class="vertical-card playing-card-image" style="background: url(<%=cardUrl%>)">
 
     </div>
+    <%}%>
 </div>
 
 <div class="moreButton">
-    MORE
+    <a href="/game&more" class="btn">More</a>
 </div>
 
 <div class="enoughButton">
-    ENOUGH
+    <a href="/game&enough" class="btn">Enough</a>
 </div>
 
 <div class="points">
-    POINTS
+    ${requestScope.pointsCount}
 </div>
 
 <div class="gameMessage">
     MESSAGE CYKA PIPIRKA WIN
 </div>
 
-<div class="west">
-</div>
-
 <div class="leftName">
-    LEFTNAME
+    ${requestScope.leftName}
 </div>
 
 <div class="rightName">
-    RIGHTNAME
+    ${requestScope.rightName}
 </div>
 
-<div class="east">
-</div>
 </body>
 </html>
