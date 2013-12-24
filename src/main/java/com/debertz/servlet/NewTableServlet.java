@@ -24,7 +24,6 @@ public class NewTableServlet extends HttpServlet {
                 Integer.parseInt(points)),
                 userCurrent);
         tableNew.join(userCurrent);
-        req.getSession().setAttribute(AttributeNames.TABLE_PARAM, tableNew);
         resp.sendRedirect("/table");
     }
 }

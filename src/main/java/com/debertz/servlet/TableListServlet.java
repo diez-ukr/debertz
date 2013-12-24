@@ -16,7 +16,7 @@ public class TableListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         for(long tableId: TablePool.getAll()){
             Table table = TablePool.get(tableId);
-            req.setAttribute("tableId", table.get_id());
+            req.setAttribute("tableId", table.getId());
             req.setAttribute("users", table.toString());
             req.setAttribute("params", table.getParams().toString());
             getServletContext().getRequestDispatcher("/templates/tableRow.jsp").include(req, resp);

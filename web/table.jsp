@@ -9,14 +9,15 @@
 <body style="padding-top: 65px;">
 <jsp:include page="/header"/>
 <div class="container">
-    <div style="width: auto; margin-bottom: 5px">
-        <a class="btn btn-primary btn-lg" href="/">
+    <div style="width: auto; margin: 5px; float: left;">
+        <a class="btn btn-primary btn-lg" href="/table?join">
             Leave table
         </a>
     </div>
 
-    <%if (request.getAttribute("isCreator") != null) {%>
-    <div style="margin-bottom: 5px; float: left">
+    <%if (((Table)session.getAttribute("table")).getCreator()
+            == session.getAttribute("user")){%>
+    <div style="margin: 5px;">
         <a class="btn btn-primary btn-lg" href="/game">
             Start Game
         </a>
@@ -26,9 +27,9 @@
     <div>
         <table class="table table-bordered">
             <tr>
-                <th>Players</th>
+                <th>Players:</th>
             </tr>
-
+            <jsp:include page="/playerList"/>
         </table>
     </div>
 </div>

@@ -55,13 +55,12 @@
         </button>
     </div>
     <div>
-        <table class="table table-bordered table-hover">
-            <tr>
-                <th>Parameters</th>
-                <th>Players</th>
-            </tr>
-            <jsp:include page="/tableList"/>
-        </table>
+        <form method="get" action="/table">
+            <input type="hidden" name="join"/>
+            <table class="table table-bordered table-hover">
+                <jsp:include page="/tableList"/>
+            </table>
+        </form>
     </div>
 </div>
 

@@ -43,7 +43,7 @@ public class Users {
 	    return cursor.count() > 0;
     }
     public static synchronized  boolean validateSid(String user, String sid) {
-        DBCursor cursor = collection.find(new BasicDBObject("name", user).append("password", sid));
+        DBCursor cursor = collection.find(new BasicDBObject("name", user).append("sid", sid));
 	    return cursor.count() > 0;
     }
 }

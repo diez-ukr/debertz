@@ -1,7 +1,8 @@
-<tr>
-    <td><%=request.getAttribute("params")%></td>
-    <td><b>Players: </b><%=request.getAttribute("users")%></td>
+<tr style="border-top-width: 2px">
+    <td><b>Players: </b>${requestScope.users}</td>
 </tr>
 <tr>
-    <td colspan="2"><a href="/joinTable" class="btn">Join</a></td>
+    <td colspan="2">
+        <button class="btn" name="table" value='${requestScope.tableId}' type="submit">Join</button>
+    </td>
 </tr>

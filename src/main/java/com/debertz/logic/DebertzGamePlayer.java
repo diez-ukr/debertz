@@ -6,9 +6,8 @@ import java.util.LinkedList;
 public class DebertzGamePlayer
 {
 
-	public DebertzGamePlayer(User user, Team team)
+	public DebertzGamePlayer(User user)
 	{
-        this.team = team;
 		this.playerName = user.getName();
 		hand = new LinkedList<PlayingCard>();
 		tricks = new LinkedList<PlayingCard[]>();
@@ -40,43 +39,42 @@ public class DebertzGamePlayer
 		}
 	}
 
-    public int getScore(PlayingCard.Suit trumpSuit)
+    public boolean overloaded() {
+        if (getScore() > 21) {
+            return true;
+        }
+        return false;
+    }
+
+    public int getScore()
     {
         int retval = 0;
-        for(DebertzCombination debertzCombination : this.combinations)
-            retval += debertzCombination.getPoints();
-        if(this.gotlastTrick)
-            retval += 10;
-        for(PlayingCard[] trick : this.tricks)
+        for(PlayingCard card : hand)
         {
-            for(PlayingCard card : trick)
+            switch (card.rank)
             {
-                switch (card.rank)
-                {
-                    case Ace:
-                        retval += 11;
-                        break;
-                    case Ten:
-                        retval += 10;
-                        break;
-                    case King:
-                        retval += 4;
-                        break;
-                    case Queen:
-                        retval += 3;
-                        break;
-                    case Jack:
-                        if (card.suit == trumpSuit)
-                            retval += 20;
-                        else
-                            retval += 2;
-                        break;
-                    case Nine:
-                        if (card.suit == trumpSuit)
-                            retval += 14;
-                        break;
-                    default:
-                        break;
+                case Ace:
+                    break;
+                case King:
+                    retval += 10;
+                    break;
+                case Queen:
+                    retval += 10;
+                    break;
+                case Jack:
+                    retval += 10;
+                    break;
+                default:
+                    retval += 1 + card.rank.ordinal();
+                    break;
+            }
+        }
+        for(PlayingCard card : hand)
+        {
+            if (card.rank == PlayingCard.Rank.Ace) {
+                retval += 11;
+                if (retval > 21) {
+                    retval -= 10;
                 }
             }
         }
@@ -96,10 +94,6 @@ public class DebertzGamePlayer
 		return false;
 	}
 
-    public Team getTeam() {
-        return team;
-    }
-
     public LinkedList<PlayingCard[]> tricks;
 	public int points;
 
@@ -107,5 +101,4 @@ public class DebertzGamePlayer
 	public volatile LinkedList<PlayingCard> hand;
 	public LinkedList<DebertzCombination> combinations;
 	public boolean gotlastTrick;
-    private Team team;
 }

@@ -38,7 +38,7 @@ public class Table extends ReflectionDBObject {
     public synchronized boolean join(User player) {
         if (TablePool.get(player) != null) return false;
         if (players.size() < params.getPlayersCount()) {
-            boolean result = players.add(player);
+            return players.add(player);
         }
         return false;
     }
