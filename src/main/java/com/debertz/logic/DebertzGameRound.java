@@ -17,6 +17,7 @@ public class DebertzGameRound
 	private PlayingCard.Suit trumpSuit;
 	private PlayingCard[] currentTrick;
 	private PlayingCard[] lastTrick;
+    private int part;
 
 	public DebertzGamePlayer getTurn()
 	{
@@ -31,25 +32,13 @@ public class DebertzGameRound
 
     public DebertzGameRound(DebertzGamePlayer[] players) throws PlayersCountException
 	{
+
 		debertzGamePlayers = players;
 		playersCount = players.length;
-		currentTrick = new PlayingCard[playersCount];
-		for (int i = 0; i < playersCount; i++)
-			currentTrick[i] = null;
-		throw new PlayersCountException("Players count must be between 1 and 4");
+		generateDeck();
 	}
 
-	public PlayingCard getTrumpCard()
-	{
-		return trumpCard;
-	}
-
-	public void setTrumpSuit(PlayingCard.Suit trumpSuit)
-	{
-		this.trumpSuit = trumpSuit;
-	}
-
-	public boolean giveCards()
+	public boolean generateDeck()
 	{
 		deck = new LinkedList<PlayingCard>();
 		for (PlayingCard.Rank rank : PlayingCard.Rank.values())
@@ -63,22 +52,11 @@ public class DebertzGameRound
 			int card2 = Math.abs(random.nextInt()) % deck.size();
 			Collections.swap(deck, card1, card2);
 		}
-		for (int i = 0; i < 6; i++)
-			for (DebertzGamePlayer player : debertzGamePlayers)
-				player.addCard(deck.removeFirst());
-		sortPlayersHands();
-
-		trumpCard = deck.getLast();
-		return true;
-	}
-
-	public boolean giveTalon()
-	{
-		int cardCount = 6 - playersCount;
-		for (int i = 0; i < cardCount; i++)
-			for (DebertzGamePlayer player : debertzGamePlayers)
-				player.addCard(deck.removeFirst());
-		sortPlayersHands();
+        for (int i=0; i < 2; i++) {
+            for (DebertzGamePlayer player : debertzGamePlayers) {
+                player.addCard(deck.pop());
+            }
+        }
 		return true;
 	}
 
@@ -164,12 +142,30 @@ public class DebertzGameRound
 
 	public boolean isRoundFinished()
 	{
-		for(DebertzGamePlayer p : debertzGamePlayers)
-			if(p.hand.size() != 0)
-				return true;
-		return false;
+		return turn >= playersCount - 1;
 	}
 
+    public void stop() {
+        nextTurn();
+    }
+
+    public boolean next() {
+        debertzGamePlayers[turn].addCard(deck.pop());
+        if (debertzGamePlayers[turn].overloaded()) {
+            nextTurn();
+            return false;
+        }
+        return true;
+    }
+
+    private boolean nextTurn() {
+        if (turn == playersCount - 1) {
+            return true;
+        } else {
+            turn++;
+            return false;
+        }
+    }
 
 	private int getHighestCard(PlayingCard[] cards)
 	{
@@ -280,5 +276,6 @@ public class DebertzGameRound
 			return null;
 		return retval;
 	}
+
 
 }

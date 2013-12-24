@@ -14,13 +14,17 @@ import java.io.IOException;
 /**
  * Created by eluppol on 24.12.13.
  */
-public class MovementServlet extends HttpServlet {
+public class ActionServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         User user = (User)req.getSession().getAttribute(AttributeNames.USER_PARAM);
-        int cardIndex = (Integer)req.getAttribute("index");
         DebertzGameRound round = TablePool.get(user).getCurrentGame().getCurrentRound();
+        String action = (String)req.getAttribute("action");
         if (round.getTurn().getPlayerName().equals(user.getName())) {
-            round.putCard(user.getName(), round.getTurn().hand.get(cardIndex));
+            if (action.equals("next")) {
+                round.next();
+            } else if (action.equals("stop")) {
+                round.stop();
+            }
         }
         getServletContext().getRequestDispatcher("/gameround.jsp");
     }
